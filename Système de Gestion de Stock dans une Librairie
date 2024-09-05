@@ -12,13 +12,13 @@ int Quantite[LONG_MAX_LIVRE];
 
 int NomLivres = 0;
 int NomTotal = 0;
-int Recherche = 0;
+
 
 int main(){
     int choix;
     char Recherche_Livre[TAILLE_MAX_TABLEAU];
-    do{
-        printf("\n\t------Gestion du Stock dans la Librairie------\t\n");
+    printf("\n\t------Gestion du Stock dans la Librairie------\t\n");
+    do{        
         printf("\n------------------------------------------\n");
         printf("Appuyer sur 1 pour Ajouter un livre:\n");
         printf("Appuyer sur 2 pour Afficher tous les livres disponobles:\n");
@@ -32,6 +32,7 @@ int main(){
         scanf("%d", &choix);
         getchar();
         switch(choix){
+            
             case 1:
                   if (NomLivres >= LONG_MAX_LIVRE)
                      printf("Le stock est deja plein, vous ne pouvez pas ajouter de livre !!\n");
@@ -41,16 +42,19 @@ int main(){
                     printf("Entrer l'auteur du livre:");
                     scanf("%[^\n]%*c", Auteur[NomLivres] );
                     printf("Entrer le prix du livre:");
-                    scanf("%.2f", &Prix[NomLivres] );
+                    scanf("%f", &Prix[NomLivres] );
                     printf("Entrer la quantite du livre:");
                     scanf(" %d", &Quantite[NomLivres] );
                   }   
                   NomLivres ++;
+                  printf("\nVotre livre est ajoute avec succee.");
                   break;
+            
             case 2:
                   if (NomLivres  == 0) {
                 printf("Aucun livre en stock.\n");
-                 }else{
+                  }
+                  else{
                      for (int i = 0; i < NomLivres; i++) {
                         printf("Titre: %s\n", Titre[i]);
                         printf("Auteur: %s\n", Auteur[i]);
@@ -59,7 +63,10 @@ int main(){
                     }
                 }
                 break;
-            case 3: printf("Entrez le titre du livre a rechercher : ");
+           
+            case 3: 
+                    int Recherche = 0;
+                    printf("Entrez le titre du livre a rechercher : ");
                     scanf("%[^\n]%*c", Recherche_Livre);
 
                     for (int i = 0; i < NomLivres; i++) {
@@ -80,7 +87,6 @@ int main(){
                 break;
                  
             case 4:
-                   Recherche=0;
                     printf("Entrez le titre du livre pour mettre à jour la quantité : ");
                     scanf("%[^\n]%*c", Recherche_Livre);
 
@@ -96,10 +102,9 @@ int main(){
                     if (!Recherche){
                         printf("Livre non trouvé.\n");
                     }
-               
+                    break;
                
             case 5:
-                    Recherche=0;
                     printf("Entrez le titre du livre à supprimer : ");
                     scanf("%[^\n]%*c", Recherche_Livre);
 
@@ -120,19 +125,25 @@ int main(){
                     if (!Recherche){
                         printf("Livre non trouvé.\n");
                     }
+                    break;
+            
             case 6:
                     for (int i = 0; i < NomLivres; i++) {
                     NomTotal += Quantite[i];
                 }
                 printf("Nombre total de livres en stock est: %d\n", NomTotal);
                 break;
+            
             case 7: 
                 printf("Programme Ferme.\n");
-                break;       
+                break;   
+
+            default : 
+                printf("Choix invalide!! Choisissez un autre choix.");
+                break;        
         }                   
     }while( choix != 7);
 
 
     return 0;
 }
-
